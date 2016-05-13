@@ -1,0 +1,5 @@
+ft_select
+obj
+libft
+*.swp
+*.o
