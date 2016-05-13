@@ -31,4 +31,7 @@
 # define ESC 0x1B // esc
 # define NUL 0x00 //\0
 
+int		ft_select_init(int ac);
+void	bc_error(char *error_msg);
+
 #endif
