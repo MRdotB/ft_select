@@ -6,7 +6,7 @@
 /*   By: bchaleil <hello@baptistechaleil.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/05/13 18:02:22 by bchaleil          #+#    #+#             */
-/*   Updated: 2016/05/13 18:02:30 by bchaleil         ###   ########.fr       */
+/*   Updated: 2016/05/14 13:38:57 by bchaleil         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,29 +34,22 @@ int	my_outc(int c)
 	return write(1, &c, 1);
 }
 
-int	voir_touche(void)
+
+void	listen_keystroke(void)
 {
 	char	buffer[8];
-	struct termios	term;
 	int		el;
-	char	*res;
 	char	*touche[] = {"CLF", "SUP", "CHT", "DEL", "le", "nd", "up", "do", "le", "CRIG", "CUPP", "CDOW", "END", "HOM", "ESC", "NUL"};
 
 	ft_memset(buffer, 0, 8);
 	while (read(0, buffer, 8) != -1)
 	{
 		el = ft_chrmatch(buffer);
-		//ft_putendl(touche[el]);
-		if ((res = tgetstr(touche[el], NULL)) == NULL)
-			return (-1);
-		tputs(res, 0, my_outc);
+		if (ft_strcmp("ESC", touche[el]) == 0)
+		{
+			exit(0);
+		}
+		ft_putendl(touche[el]);
 		ft_memset(buffer, 0, 8);
 	}
-	if (tcgetattr(0, &term) == -1)
-		return (-1);
-	// remet le term par default
-	term.c_lflag = (ICANON | ECHO);
-	if(tcsetattr(0, 0, &term) == -1)
-		return (-1);
-	return (0);
 }
