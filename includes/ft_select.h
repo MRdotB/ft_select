@@ -6,6 +6,8 @@
 # include <termios.h>
 # include <term.h>
 # include <stdio.h>
+# include <signal.h>
+# include <sys/ioctl.h>
 
 
 # ifdef __unix__
@@ -33,5 +35,20 @@
 
 int		ft_select_init(int ac);
 void	bc_error(char *error_msg);
+void	listen_keystroke(void);
+
+void	catch_signal(void);
+void	handle_signal(int sig);
+
+void	term_setup(struct termios **config);
+void	term_restore(struct termios **config);
+
+void	term_clear(void);
+int		termsize(int y);
+
+void	cmdput(char *area);
+int		cmdgoto(int x, int y);
+
+void	render(void);
 
 #endif
