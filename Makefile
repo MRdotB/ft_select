@@ -6,7 +6,7 @@
 #    By: bchaleil <hello@baptistechaleil.fr>        +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2016/01/12 16:21:36 by bchaleil          #+#    #+#              #
-#    Updated: 2016/05/14 21:39:41 by bchaleil         ###   ########.fr        #
+#    Updated: 2016/05/14 21:58:04 by bchaleil         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -19,8 +19,7 @@ LIB_LINK		=	-L $(LIB_PATH) -lft
 INCLUDES		=	-I ./includes -I ./libft/includes
 SRCS			=	srcs/main.c srcs/errors.c srcs/ft_select_init.c\
 					srcs/signal.c srcs/listen_keystroke.c srcs/term.c\
-					srcs/termcaps_wrap.c srcs/render.c srcs/termsize.c\
-					srcs/term_clear.c
+					srcs/termcaps_wrap.c srcs/render.c
 
 OBJS			=	$(SRCS:srcs/%.c=obj/%.o)
 
