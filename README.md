@@ -6,9 +6,11 @@ _A 42 project._
 
 ##Documentation
 ### Termcaps
++ 'cm' String of commands to position the cursor at line l, column c. Both parameters are origin-zero, and are defined relative to the screen, not relative to display memory. All display terminals except a few very obsolete ones support 'cm', so it is acceptable for an application program to refuse to operate on terminals lacking 'cm'.
 + 've' String of commands to return the cursor to normal.
 + 'vi' String of commands to make the cursor invisible.
 + 'te' String of commands to undo what is done by the 'ti' string. Programs that output the 'ti' string on entry should output this string when they exit.
++ 'dl' String of commands to delete the line the cursor is on. The following lines move up, and a blank line appears at the bottom of the screen (or bottom of the scroll region). If the terminal has the 'db' flag, a nonblank line previously pushed off the screen bottom may reappear at the bottom. The cursor must be at the left margin before this command is used. This command does not move the cursor.
 
 
 ### Linux Signals
