@@ -6,7 +6,7 @@
 /*   By: bchaleil <hello@baptistechaleil.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/05/13 22:46:14 by bchaleil          #+#    #+#             */
-/*   Updated: 2016/05/15 23:10:13 by bchaleil         ###   ########.fr       */
+/*   Updated: 2016/05/16 00:15:27 by bchaleil         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,19 +16,10 @@ static int	f_biggest(t_dlist *lst)
 {
 	int	ret;
 	int len;
-	t_dlist *stop;
 
+	lst->prev->next = NULL;
 	ret = 0;
-	if (lst == NULL)
-		return (ret);
-	if ((stop = lst))
-	{
-		len = ft_strlen(((t_slt_el*)lst->content)->str);
-		if (len > ret)
-			ret = len;
-		lst = lst->next;
-	}
-	while (lst != stop)
+	while (lst)
 	{
 		len = ft_strlen(((t_slt_el*)lst->content)->str);
 		if (len > ret)
@@ -74,12 +65,12 @@ void	display(t_dlist *lst, int biggest, int w)
 			y++;
 			cmdgoto(x * (biggest + 3), y);
 		}
-		if (((t_slt_el*)lst->selected)
-			ft_putstr("\e[7m");
-		if (((t_slt_el*)lst->current)
-			ft_putstr("\e[7m");
+//		if (((t_slt_el*)lst->content)->selected)
+//			ft_putstr("\e[7m");
+//		if (((t_slt_el*)lst->content)->current)
+//			ft_putstr("\e[4m");
 		ft_putstr(((t_slt_el*)lst->content)->str);
-		ft_putstr("\e[27m");
+		ft_putstr("\e[0m");
 		lst = lst->next;
 	}
 }
@@ -93,9 +84,9 @@ void	render(t_dlist *head)
 	biggest = f_biggest(head);
 	w = termsize(0);
 	h = termsize(1);
-	printf("w= %d, h= %d, biggest= %d", w, h, biggest);
-	printf("per col= %d", w / (biggest + 2));
+//	printf("w= %d, h= %d, biggest= %d", w, h, biggest);
+//	printf("per col= %d", w / (biggest + 3));
 	if (fit_in_term(head, biggest, w, h) == 0)
-		return ft_putstr("Terminal is too tiny !");
+		return (ft_putstr("Terminal is too tiny !"));
 	display(head, biggest, w);
 }
