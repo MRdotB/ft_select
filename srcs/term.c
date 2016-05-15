@@ -57,13 +57,13 @@ void	term_clear(void)
 	}
 }
 
-int		termsize(int y)
+int		termsize(int xy)
 {
 	int				ret;
 	struct winsize	win;
 
 	ret = 0;
 	if (!ioctl(STDIN_FILENO, TIOCGWINSZ, &win))
-		ret = (y) ? win.ws_row : win.ws_col;
+		ret = (xy) ? win.ws_row : win.ws_col;
 	return (ret);
 }
