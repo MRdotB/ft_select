@@ -46,7 +46,7 @@ typedef struct s_slt_el	t_slt_el;
 int		ft_select_init(int ac);
 void	entry_init(t_dlist **head, char **av);
 void	bc_error(char *error_msg);
-void	listen_keystroke(void);
+void	listen_keystroke(t_dlist *lst);
 
 void	catch_signal(void);
 void	handle_signal(int sig);
