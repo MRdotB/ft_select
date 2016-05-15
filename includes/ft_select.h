@@ -9,7 +9,6 @@
 # include <signal.h>
 # include <sys/ioctl.h>
 
-
 # ifdef __unix__
 #  include <linux/limits.h>
 # elif defined __APPLE__
@@ -33,7 +32,19 @@
 # define ESC 0x1B // esc
 # define NUL 0x00 //\0
 
+struct		s_slt_el
+{
+	char	*str;
+	int		selected;
+	int		current;
+	int		x;
+	int		y;
+};
+
+typedef struct s_slt_el	t_slt_el;
+
 int		ft_select_init(int ac);
+void	entry_init(t_dlist **head, char **av);
 void	bc_error(char *error_msg);
 void	listen_keystroke(void);
 
@@ -44,11 +55,11 @@ void	term_setup(struct termios **config);
 void	term_restore(struct termios **config);
 
 void	term_clear(void);
-int		termsize(int y);
+int		termsize(int xy);
 
 void	cmdput(char *area);
 int		cmdgoto(int x, int y);
 
-void	render(void);
+void	render(t_dlist *head);
 
 #endif
