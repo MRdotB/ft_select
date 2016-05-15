@@ -6,7 +6,7 @@
 /*   By: bchaleil <hello@baptistechaleil.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/05/13 18:02:22 by bchaleil          #+#    #+#             */
-/*   Updated: 2016/05/14 13:38:57 by bchaleil         ###   ########.fr       */
+/*   Updated: 2016/05/16 00:13:35 by bchaleil         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,7 @@ int	my_outc(int c)
 }
 
 
-void	listen_keystroke(void)
+void	listen_keystroke(t_dlist *lst)
 {
 	char	buffer[8];
 	int		el;
@@ -49,6 +49,8 @@ void	listen_keystroke(void)
 		{
 			exit(0);
 		}
+		term_clear();
+		render(lst);
 		ft_putendl(touche[el]);
 		ft_memset(buffer, 0, 8);
 	}
