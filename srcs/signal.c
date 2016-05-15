@@ -6,7 +6,7 @@
 /*   By: bchaleil <hello@baptistechaleil.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/05/14 21:39:15 by bchaleil          #+#    #+#             */
-/*   Updated: 2016/05/14 21:39:21 by bchaleil         ###   ########.fr       */
+/*   Updated: 2016/05/16 00:14:12 by bchaleil         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,17 +20,15 @@ void	catch_signal(void)
 	signal(SIGQUIT, handle_signal);
 	signal(SIGINT, handle_signal);
 	signal(SIGBUS, handle_signal);
-	signal(SIGKILL, handle_signal);
 	signal(SIGFPE, handle_signal);
 	signal(SIGSYS, handle_signal);
 	signal(SIGABRT, handle_signal);
 	signal(SIGALRM, handle_signal);
 	signal(SIGCONT, handle_signal);
 	signal(SIGPIPE, SIG_DFL);
-	signal(SIGSEGV, handle_signal);
+//	signal(SIGSEGV, handle_signal);
 	signal(SIGTERM, handle_signal);
 	signal(SIGTTOU, handle_signal);
-	signal(SIGSTOP, handle_signal);
 	signal(SIGTSTP, handle_signal);
 	signal(SIGUSR1, handle_signal);
 	signal(SIGUSR2, handle_signal);
@@ -57,6 +55,8 @@ void		handle_signal(int sig)
 		ft_putendl("resize");
 	else
 	{
+//	DEBUG
+//		ft_putnbrnl(sig);
 		cmdput("ve");
 		cmdput("te");
 		tcsetattr(STDIN_FILENO, TCSANOW, config);
