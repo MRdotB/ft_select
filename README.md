@@ -11,6 +11,9 @@ _A 42 project._
 + 'vi' String of commands to make the cursor invisible.
 + 'te' String of commands to undo what is done by the 'ti' string. Programs that output the 'ti' string on entry should output this string when they exit.
 + 'dl' String of commands to delete the line the cursor is on. The following lines move up, and a blank line appears at the bottom of the screen (or bottom of the scroll region). If the terminal has the 'db' flag, a nonblank line previously pushed off the screen bottom may reappear at the bottom. The cursor must be at the left margin before this command is used. This command does not move the cursor.
++ 'us' Enter underline mode.
++ 'ue' Turn off underline mode.
++ 'me' Default mode
 
 
 ### Linux Signals
