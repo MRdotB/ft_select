@@ -6,7 +6,7 @@
 /*   By: bchaleil <hello@baptistechaleil.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/05/13 16:45:23 by bchaleil          #+#    #+#             */
-/*   Updated: 2016/05/16 00:13:06 by bchaleil         ###   ########.fr       */
+/*   Updated: 2016/05/16 21:58:55 by bchaleil         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ int	main(int ac, char **av)
 	handle_signal(0);
 	cmdput("ti");
 	cmdput("cl");
-	render(head);
-	listen_keystroke(head);
+	render(head, 0);
+	listen_keystroke(&head, head);
 	return (0);
 }

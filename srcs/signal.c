@@ -6,7 +6,7 @@
 /*   By: bchaleil <hello@baptistechaleil.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/05/14 21:39:15 by bchaleil          #+#    #+#             */
-/*   Updated: 2016/05/16 00:14:12 by bchaleil         ###   ########.fr       */
+/*   Updated: 2016/05/16 22:14:47 by bchaleil         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,8 +51,11 @@ void		handle_signal(int sig)
 		term_restore(&config);
 	else if (sig == SIGCONT)
 		ft_putendl("sigcount ctrl z");
-	else if (sig == SIGWINCH)
-		ft_putendl("resize");
+	else if (sig == SIGWINCH || sig == 11)
+	{
+		term_clear();
+		render(NULL, 1);
+	}
 	else
 	{
 //	DEBUG

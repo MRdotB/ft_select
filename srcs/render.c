@@ -6,25 +6,29 @@
 /*   By: bchaleil <hello@baptistechaleil.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/05/13 22:46:14 by bchaleil          #+#    #+#             */
-/*   Updated: 2016/05/16 00:15:27 by bchaleil         ###   ########.fr       */
+/*   Updated: 2016/05/16 22:04:08 by bchaleil         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_select.h"
 
-static int	f_biggest(t_dlist *lst)
+int	f_biggest(t_dlist *lst)
 {
 	int	ret;
 	int len;
+	int	count;
+	int	i;
 
-	lst->prev->next = NULL;
+	count = ft_dlstcount(lst);
+	i = 1;
 	ret = 0;
-	while (lst)
+	while (i < count)
 	{
 		len = ft_strlen(((t_slt_el*)lst->content)->str);
 		if (len > ret)
 			ret = len;
 		lst = lst->next;
+		i++;
 	}
 	return (ret);
 }
@@ -42,17 +46,30 @@ int		fit_in_term(t_dlist	*head, int biggest, int w, int h)
 		return (1);
 }
 
+void	display_el(t_dlist *lst)
+{
+	if (((t_slt_el*)lst->content)->current == 1)
+		cmdput("us");
+	if (((t_slt_el*)lst->content)->selected == 1)
+		cmdput("mr");
+	ft_putstr(((t_slt_el*)lst->content)->str);
+	cmdput("me");
+}
+
 void	display(t_dlist *lst, int biggest, int w)
 {
 	int	per_col;
 	int	x;
 	int	y;
+	int	count;
+	int	i;
 
-	lst->prev->next = NULL;
+	count = ft_dlstcount(lst);
+	i = 1;
 	per_col = w / (biggest + 3);
 	y = 0;
 	x = 0;
-	while (lst)
+	while (i < count)
 	{
 		if (x < per_col)
 		{
@@ -65,28 +82,30 @@ void	display(t_dlist *lst, int biggest, int w)
 			y++;
 			cmdgoto(x * (biggest + 3), y);
 		}
-//		if (((t_slt_el*)lst->content)->selected)
-//			ft_putstr("\e[7m");
-//		if (((t_slt_el*)lst->content)->current)
-//			ft_putstr("\e[4m");
-		ft_putstr(((t_slt_el*)lst->content)->str);
-		ft_putstr("\e[0m");
+		display_el(lst);
+		i++;
+		((t_slt_el*)lst->content)->x = x * (biggest + 3);
+		((t_slt_el*)lst->content)->y = y;
 		lst = lst->next;
 	}
 }
 
-void	render(t_dlist *head)
+void	render(t_dlist *lst, int hacky)
 {
+	static t_dlist *head; 
 	int	biggest; 
 	int	w;
 	int	h;
 
+	if (hacky == 0)
+		head = lst;
 	biggest = f_biggest(head);
 	w = termsize(0);
 	h = termsize(1);
-//	printf("w= %d, h= %d, biggest= %d", w, h, biggest);
-//	printf("per col= %d", w / (biggest + 3));
 	if (fit_in_term(head, biggest, w, h) == 0)
+	{
+		term_clear();
 		return (ft_putstr("Terminal is too tiny !"));
+	}
 	display(head, biggest, w);
 }
