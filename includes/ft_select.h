@@ -63,5 +63,4 @@ void	lst_select(t_dlist **lst);
 int		f_biggest(t_dlist *lst);
 void	render(t_dlist *lst, int hacky);
 
-int	col_number(t_dlist *head);
 #endif
