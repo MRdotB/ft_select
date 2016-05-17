@@ -6,7 +6,7 @@
 /*   By: bchaleil <hello@baptistechaleil.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/05/13 22:46:14 by bchaleil          #+#    #+#             */
-/*   Updated: 2016/05/16 22:04:08 by bchaleil         ###   ########.fr       */
+/*   Updated: 2016/05/17 02:43:07 by bchaleil         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,7 +80,7 @@ void	display(t_dlist *lst, int biggest, int w)
 		{
 			x = 0;
 			y++;
-			cmdgoto(x * (biggest + 3), y);
+			cmdgoto(x++ * (biggest + 3), y);
 		}
 		display_el(lst);
 		i++;
