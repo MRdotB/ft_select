@@ -6,30 +6,36 @@
 /*   By: bchaleil <hello@baptistechaleil.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/05/14 22:21:13 by bchaleil          #+#    #+#             */
-/*   Updated: 2016/05/16 18:44:01 by bchaleil         ###   ########.fr       */
+/*   Updated: 2016/05/25 15:57:46 by bchaleil         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_select.h"
 
-static t_slt_el	create_entry(char *str)
+static t_slt_el	*create_entry(char *str)
 {
-	t_slt_el el;
+	t_slt_el	*el;
 
-	el.str = ft_strdup(str);
-	el.selected = 0;
-	el.current = 0;
+	if (!(el = ft_memalloc(sizeof(*el))))
+		return (NULL);
+	el->str = ft_strdup(str);
+	el->selected = 0;
+	el->current = 0;
+	el->x = 0;
+	el->y = 0;
 	return (el);
 }
 
 void			entry_init(t_dlist **head, char **av)
 {
-	t_slt_el	el;
+	t_slt_el	*data;
+	t_dlist		*lst;
 
-	while (*av)
+	while (*av != NULL)
 	{
-		el = create_entry(*av);
-		ft_dlstpush(head, ft_dlstnew(&el, sizeof(&el))); 
+		data = create_entry(*av);
+		lst = ft_dlstnew(data, sizeof(data));
+		ft_dlstpush(head, lst); 
 		av++;
 	}
 }
