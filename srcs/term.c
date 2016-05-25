@@ -6,7 +6,7 @@
 /*   By: bchaleil <hello@baptistechaleil.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/05/13 20:53:05 by bchaleil          #+#    #+#             */
-/*   Updated: 2016/05/14 21:41:39 by bchaleil         ###   ########.fr       */
+/*   Updated: 2016/05/25 16:44:36 by bchaleil         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,8 @@ void	term_setup(struct termios **config)
 {
 	struct termios	new;
 
+	catch_signal();
+	cmdput("vi");
 	if (!(*config = (struct termios *)malloc(sizeof(struct termios))))
 		return ;
 	tcgetattr(STDIN_FILENO, *config);
