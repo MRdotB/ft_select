@@ -6,7 +6,7 @@
 /*   By: bchaleil <hello@baptistechaleil.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/05/13 22:46:14 by bchaleil          #+#    #+#             */
-/*   Updated: 2016/05/25 16:16:35 by bchaleil         ###   ########.fr       */
+/*   Updated: 2016/05/25 16:38:57 by bchaleil         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,7 @@ int		fit_in_term(t_dlist	*head, int biggest, int w, int h)
 	if (biggest > w)
 		return (0);
 	per_col = w / (biggest + 3);
-	if ((ft_dlstcount(head) / per_col) > h)
+	if (!per_col || ((ft_dlstcount(head) / per_col) > h))
 		return (0);
 	else
 		return (1);
@@ -100,6 +100,8 @@ void	render(t_dlist *lst, int hacky)
 
 	if (hacky == 0)
 		head = lst;
+	else
+		term_clear();
 	biggest = f_biggest(head);
 	w = termsize(0);
 	h = termsize(1);
