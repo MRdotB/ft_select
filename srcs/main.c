@@ -6,7 +6,7 @@
 /*   By: bchaleil <hello@baptistechaleil.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/05/13 16:45:23 by bchaleil          #+#    #+#             */
-/*   Updated: 2016/05/16 21:58:55 by bchaleil         ###   ########.fr       */
+/*   Updated: 2016/05/25 16:23:46 by bchaleil         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 int	main(int ac, char **av)
 {
-	t_dlist		*head;
+	t_dlist	*head;
 
 	head = NULL;
 	if (ft_select_init(ac) == -1)
@@ -23,6 +23,7 @@ int	main(int ac, char **av)
 	handle_signal(0);
 	cmdput("ti");
 	cmdput("cl");
+	((t_slt_el*)head->content)->current = 1;
 	render(head, 0);
 	listen_keystroke(&head, head);
 	return (0);
