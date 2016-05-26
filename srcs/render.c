@@ -6,7 +6,7 @@
 /*   By: bchaleil <hello@baptistechaleil.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/05/13 22:46:14 by bchaleil          #+#    #+#             */
-/*   Updated: 2016/05/26 14:04:44 by bchaleil         ###   ########.fr       */
+/*   Updated: 2016/05/26 15:50:46 by bchaleil         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,10 +48,21 @@ static int	fit_in_term(t_dlist *head, int biggest, int w, int h)
 
 static void	display_el(t_dlist *lst)
 {
+	char	*str;
+	int		len;
+
+	str = ((t_slt_el*)lst->content)->str;
+	len = ft_strlen(str) - 1;
 	if (((t_slt_el*)lst->content)->current == 1)
 		cmdput("us");
 	if (((t_slt_el*)lst->content)->selected == 1)
 		cmdput("mr");
+	if (str[len] == 'c' && str[len - 1] == '.')
+		ft_putstr_fd(GREEN, isatty(STDOUT_FILENO));
+	else if (str[len] == 'o' && str[len - 1] == '.')
+		ft_putstr_fd(YELLOW, isatty(STDOUT_FILENO));
+	else
+		ft_putstr_fd(CYAN, isatty(STDOUT_FILENO));
 	ft_putstr_fd(((t_slt_el*)lst->content)->str, isatty(STDOUT_FILENO));
 	cmdput("me");
 }
