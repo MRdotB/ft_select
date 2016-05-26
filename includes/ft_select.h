@@ -6,7 +6,7 @@
 /*   By: bchaleil <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/05/26 12:59:06 by bchaleil          #+#    #+#             */
-/*   Updated: 2016/05/26 14:09:26 by bchaleil         ###   ########.fr       */
+/*   Updated: 2016/05/26 16:06:28 by bchaleil         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,7 +44,6 @@ typedef struct	s_slt_el
 	int			selected;
 	int			current;
 	int			x;
-	int			y;
 	int			first;
 }				t_slt_el;
 
@@ -56,7 +55,7 @@ void			listen_keystroke(t_dlist **lst);
 void			catch_signal(void);
 void			handle_signal(int sig);
 
-void			term_setup(struct termios **config);
+void			term_setup(struct termios **config, int sig);
 void			term_restore(struct termios **config);
 
 void			term_clear(void);

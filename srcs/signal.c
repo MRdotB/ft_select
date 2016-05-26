@@ -6,7 +6,7 @@
 /*   By: bchaleil <hello@baptistechaleil.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/05/14 21:39:15 by bchaleil          #+#    #+#             */
-/*   Updated: 2016/05/26 14:08:48 by bchaleil         ###   ########.fr       */
+/*   Updated: 2016/05/26 16:08:58 by bchaleil         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,12 +28,12 @@ void		handle_signal(int sig)
 
 	if (config == NULL || sig == SIGTSTP || sig == SIGCONT)
 	{
-		term_setup(&config);
+		term_setup(&config, 0);
 		if (sig == SIGTSTP)
 			term_restore(&config);
 		else if (sig == SIGCONT)
 		{
-			term_setup(&config);
+			term_setup(&config, 1);
 			render(NULL, 1);
 		}
 	}

@@ -6,19 +6,21 @@
 /*   By: bchaleil <hello@baptistechaleil.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/05/13 20:53:05 by bchaleil          #+#    #+#             */
-/*   Updated: 2016/05/25 16:44:36 by bchaleil         ###   ########.fr       */
+/*   Updated: 2016/05/26 16:07:37 by bchaleil         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_select.h"
 
-void	term_setup(struct termios **config)
+void	term_setup(struct termios **config, int ti)
 {
 	struct termios	new;
 
 	catch_signal();
+	if (ti == 1)
+		cmdput("ti");
 	cmdput("vi");
-	if (!(*config = (struct termios *)malloc(sizeof(struct termios))))
+	if (!(*config = (struct termios *)ft_memalloc(sizeof(struct termios))))
 		return ;
 	tcgetattr(STDIN_FILENO, *config);
 	new = **config;
@@ -37,6 +39,7 @@ void	term_restore(struct termios **config)
 	term_clear();
 	cmdgoto(0, 0);
 	cmdput("ve");
+	cmdput("te");
 	tcsetattr(STDIN_FILENO, TCSANOW, *config);
 	signal(SIGTSTP, SIG_DFL);
 	cp[0] = (*config)->c_cc[VSUSP];
