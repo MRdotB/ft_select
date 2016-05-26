@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   ft_select.h                                        :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: bchaleil <marvin@42.fr>                    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2016/05/26 12:59:06 by bchaleil          #+#    #+#             */
+/*   Updated: 2016/05/26 13:02:09 by bchaleil         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #ifndef FT_SELECT_H
 # define FT_SELECT_H
 
@@ -15,56 +27,54 @@
 #  include <sys/syslimits.h>
 # endif
 
-# define CLF 0x0A //\n
-# define SUP 0x7E335B1B //sup
-# define DEL 0x7F //DEL
-# define LEF 0x445B1B //left
-# define RIG 0x435B1B //right
-# define UPP 0x415B1B //up
-# define DOW 0x425B1B //down
-# define SPA ' ' // space
-# define ESC 0x1B // esc
-# define NUL 0x00 // \0
+# define CLF 0x0A
+# define SUP 0x7E335B1B
+# define DEL 0x7F
+# define LEF 0x445B1B
+# define RIG 0x435B1B
+# define UPP 0x415B1B
+# define DOW 0x425B1B
+# define SPA ' '
+# define ESC 0x1B
+# define NUL 0x00
 
-struct		s_slt_el
+typedef struct	s_slt_el
 {
-	char	*str;
-	int		selected;
-	int		current;
-	int		x;
-	int		y;
-	int		first;
-};
+	char		*str;
+	int			selected;
+	int			current;
+	int			x;
+	int			y;
+	int			first;
+}				t_slt_el;
 
-typedef struct s_slt_el	t_slt_el;
+int				ft_select_init(int ac);
+void			entry_init(t_dlist **head, char **av);
+void			bc_error(char *error_msg);
+void			listen_keystroke(t_dlist **lst);
 
-int		ft_select_init(int ac);
-void	entry_init(t_dlist **head, char **av);
-void	bc_error(char *error_msg);
-void	listen_keystroke(t_dlist **lst);
+void			catch_signal(void);
+void			handle_signal(int sig);
 
-void	catch_signal(void);
-void	handle_signal(int sig);
+void			term_setup(struct termios **config);
+void			term_restore(struct termios **config);
 
-void	term_setup(struct termios **config);
-void	term_restore(struct termios **config);
+void			term_clear(void);
+int				termsize(int xy);
 
-void	term_clear(void);
-int		termsize(int xy);
+void			cmdput(char *area);
+int				cmdgoto(int x, int y);
 
-void	cmdput(char *area);
-int		cmdgoto(int x, int y);
+void			lst_move_right(t_dlist **lst);
+void			lst_move_left(t_dlist **lst);
+void			lst_move_down(t_dlist **lst);
+void			lst_move_up(t_dlist **lst);
+void			lst_select(t_dlist **lst);
+void			lst_del_one(t_dlist **lst);
+void			validate_render(t_dlist *lst);
+void			lst_validate(t_dlist **lst);
 
-void	lst_move_right(t_dlist **lst);
-void	lst_move_left(t_dlist **lst);
-void	lst_move_down(t_dlist **lst);
-void	lst_move_up(t_dlist **lst);
-void	lst_select(t_dlist **lst);
-void	lst_del_one(t_dlist **lst);
-void	validate_render(t_dlist *lst);
-void	lst_validate(t_dlist **lst);
-
-int		f_biggest(t_dlist *lst);
-void	render(t_dlist *lst, int hacky);
+int				f_biggest(t_dlist *lst);
+void			render(t_dlist *lst, int hacky);
 
 #endif
