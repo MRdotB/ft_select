@@ -6,7 +6,7 @@
 /*   By: bchaleil <hello@baptistechaleil.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/05/14 22:21:13 by bchaleil          #+#    #+#             */
-/*   Updated: 2016/05/25 16:23:53 by bchaleil         ###   ########.fr       */
+/*   Updated: 2016/05/26 14:05:37 by bchaleil         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,7 @@ static t_slt_el	*create_entry(char *str)
 	el->current = 0;
 	el->x = 0;
 	el->y = 0;
+	el->first = 0;
 	return (el);
 }
 
@@ -35,7 +36,7 @@ void			entry_init(t_dlist **head, char **av)
 	{
 		data = create_entry(*av);
 		lst = ft_dlstnew(data, sizeof(data));
-		ft_dlstpush(head, lst); 
+		ft_dlstpush(head, lst);
 		av++;
 	}
 }

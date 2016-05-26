@@ -6,7 +6,7 @@
 /*   By: bchaleil <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/05/26 12:59:06 by bchaleil          #+#    #+#             */
-/*   Updated: 2016/05/26 13:02:09 by bchaleil         ###   ########.fr       */
+/*   Updated: 2016/05/26 14:09:26 by bchaleil         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,7 +63,7 @@ void			term_clear(void);
 int				termsize(int xy);
 
 void			cmdput(char *area);
-int				cmdgoto(int x, int y);
+void			cmdgoto(int x, int y);
 
 void			lst_move_right(t_dlist **lst);
 void			lst_move_left(t_dlist **lst);
@@ -74,7 +74,6 @@ void			lst_del_one(t_dlist **lst);
 void			validate_render(t_dlist *lst);
 void			lst_validate(t_dlist **lst);
 
-int				f_biggest(t_dlist *lst);
 void			render(t_dlist *lst, int hacky);
 
 #endif

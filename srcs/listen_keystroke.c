@@ -6,7 +6,7 @@
 /*   By: bchaleil <hello@baptistechaleil.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/05/13 18:02:22 by bchaleil          #+#    #+#             */
-/*   Updated: 2016/05/16 21:59:46 by bchaleil         ###   ########.fr       */
+/*   Updated: 2016/05/26 13:59:30 by bchaleil         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,14 +14,13 @@
 
 static int		ft_chrmatch(char *str)
 {
-	static ssize_t	match[] = {CLF, SUP, DEL, LEF, RIG, UPP, DOW, SPA, ESC, NUL};
-	int	i;
+	static ssize_t	match[] = {CLF, SUP, DEL, LEF, RIG, UPP, DOW, SPA, ESC,
+		NUL};
+	int				i;
 
 	i = 0;
-//	printf("\nbuf = %lx\n", ((ssize_t *)(str))[0]);
 	while (match[i])
 	{
-//		printf("\nmatch = %lx\n", match[i]);
 		if (((ssize_t *)(str))[0] == match[i])
 			return (i);
 		i++;
@@ -29,25 +28,48 @@ static int		ft_chrmatch(char *str)
 	return (0);
 }
 
-void	listen_keystroke(t_dlist **lst, t_dlist *head)
+static t_dlist	*find_first(t_dlist **lst)
 {
-	char	buffer[8];
-	int		el;
-	char	*touche[] = {"CLF", "SUP", "DEL", "LEF", "RIG", "UPP", "DOW", "SPA", "ESC", "NUL"};
-	static void (*f[])(t_dlist **lst) = { lst_move_up, lst_move_up, lst_move_up, lst_move_left,
-		lst_move_right, lst_move_up, lst_move_down, lst_select, lst_move_down, lst_move_down};
+	t_dlist	*cpy;
+
+	cpy = *lst;
+	while (cpy)
+	{
+		if ((((t_slt_el*)cpy->content)->first) == 1)
+			return (cpy);
+		cpy = cpy->next;
+	}
+	return (NULL);
+}
+
+static void		lst_void_ret(t_dlist **lst)
+{
+	if (*lst)
+		return ;
+	return ;
+}
+
+static void		lst_esc(t_dlist **lst)
+{
+	if (*lst)
+		handle_signal(0);
+	handle_signal(0);
+}
+
+void			listen_keystroke(t_dlist **lst)
+{
+	char		buffer[8];
+	int			el;
+	static void	(*f[])(t_dlist **lst) = { lst_validate, lst_del_one,
+		lst_del_one, lst_move_left, lst_move_right, lst_move_up,
+		lst_move_down, lst_select, lst_esc, lst_void_ret};
+
 	ft_memset(buffer, 0, 8);
 	while (read(0, buffer, 8) != -1)
 	{
 		el = ft_chrmatch(buffer);
-		if (ft_strcmp("ESC", touche[el]) == 0)
-		{
-			handle_signal(0);
-		}
-		term_clear();
 		f[el](lst);
-		render(head, 0);
-//		ft_putendl(touche[el]);
+		render(find_first(lst), 0);
 		ft_memset(buffer, 0, 8);
 	}
 }

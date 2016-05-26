@@ -6,7 +6,7 @@
 /*   By: bchaleil <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/05/25 16:52:34 by bchaleil          #+#    #+#             */
-/*   Updated: 2016/05/26 12:49:24 by bchaleil         ###   ########.fr       */
+/*   Updated: 2016/05/26 12:57:58 by bchaleil         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,7 +62,8 @@ void	validate_render(t_dlist *lst)
 		i++;
 		lst = lst->next;
 	}
-	ft_putchar('\n');
+	if (flag)
+		ft_putchar('\n');
 }
 
 void	lst_validate(t_dlist **lst)

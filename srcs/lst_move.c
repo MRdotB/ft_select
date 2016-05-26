@@ -6,7 +6,7 @@
 /*   By: bchaleil <hello@baptistechaleil.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/05/16 14:19:19 by bchaleil          #+#    #+#             */
-/*   Updated: 2016/05/16 21:46:16 by bchaleil         ###   ########.fr       */
+/*   Updated: 2016/05/26 13:56:09 by bchaleil         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@ void	lst_move_left(t_dlist **lst)
 
 void	lst_move_down(t_dlist **lst)
 {
-	int x;
+	int			x;
 	t_slt_el	*el;
 
 	x = ((t_slt_el*)(*lst)->content)->x;
@@ -46,7 +46,7 @@ void	lst_move_down(t_dlist **lst)
 
 void	lst_move_up(t_dlist **lst)
 {
-	int x;
+	int			x;
 	t_slt_el	*el;
 
 	x = ((t_slt_el*)(*lst)->content)->x;

@@ -6,13 +6,13 @@
 /*   By: bchaleil <hello@baptistechaleil.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/05/13 22:46:14 by bchaleil          #+#    #+#             */
-/*   Updated: 2016/05/25 16:38:57 by bchaleil         ###   ########.fr       */
+/*   Updated: 2016/05/26 14:04:44 by bchaleil         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_select.h"
 
-int	f_biggest(t_dlist *lst)
+static int	f_biggest(t_dlist *lst)
 {
 	int	ret;
 	int len;
@@ -33,7 +33,7 @@ int	f_biggest(t_dlist *lst)
 	return (ret);
 }
 
-int		fit_in_term(t_dlist	*head, int biggest, int w, int h)
+static int	fit_in_term(t_dlist *head, int biggest, int w, int h)
 {
 	int	per_col;
 
@@ -46,17 +46,17 @@ int		fit_in_term(t_dlist	*head, int biggest, int w, int h)
 		return (1);
 }
 
-void	display_el(t_dlist *lst)
+static void	display_el(t_dlist *lst)
 {
 	if (((t_slt_el*)lst->content)->current == 1)
 		cmdput("us");
 	if (((t_slt_el*)lst->content)->selected == 1)
 		cmdput("mr");
-	ft_putstr(((t_slt_el*)lst->content)->str);
+	ft_putstr_fd(((t_slt_el*)lst->content)->str, isatty(STDOUT_FILENO));
 	cmdput("me");
 }
 
-void	display(t_dlist *lst, int biggest, int w)
+static void	display(t_dlist *lst, int biggest, int w)
 {
 	int	per_col;
 	int	x;
@@ -72,43 +72,38 @@ void	display(t_dlist *lst, int biggest, int w)
 	while (i < count)
 	{
 		if (x < per_col)
-		{
-			cmdgoto(x * (biggest + 3), y);
-			x++;
-		}
+			cmdgoto(x++ * (biggest + 3), y);
 		else
 		{
 			x = 0;
-			y++;
-			cmdgoto(x++ * (biggest + 3), y);
+			cmdgoto(x++ * (biggest + 3), ++y);
 		}
 		display_el(lst);
 		i++;
 		((t_slt_el*)lst->content)->x = x * (biggest + 3);
-		((t_slt_el*)lst->content)->y = y;
 		lst = lst->next;
 	}
 }
 
-
-void	render(t_dlist *lst, int hacky)
+void		render(t_dlist *lst, int hacky)
 {
-	static t_dlist *head; 
-	int	biggest; 
-	int	w;
-	int	h;
+	static t_dlist	*head;
+	int				biggest;
+	int				w;
+	int				h;
 
+	if (hacky == 1337)
+		return (validate_render(head));
+	term_clear();
 	if (hacky == 0)
 		head = lst;
-	else
-		term_clear();
 	biggest = f_biggest(head);
 	w = termsize(0);
 	h = termsize(1);
 	if (fit_in_term(head, biggest, w, h) == 0)
 	{
 		term_clear();
-		return (ft_putstr("Terminal is too tiny !"));
+		return (ft_putstr_fd("Terminal is too tiny !", isatty(STDOUT_FILENO)));
 	}
 	display(head, biggest, w);
 }

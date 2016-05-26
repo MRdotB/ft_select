@@ -6,13 +6,13 @@
 /*   By: bchaleil <hello@baptistechaleil.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/05/14 21:39:15 by bchaleil          #+#    #+#             */
-/*   Updated: 2016/05/25 16:44:45 by bchaleil         ###   ########.fr       */
+/*   Updated: 2016/05/26 14:08:48 by bchaleil         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_select.h"
 
-void	catch_signal(void)
+void		catch_signal(void)
 {
 	signal(SIGTSTP, handle_signal);
 	signal(SIGCONT, handle_signal);
@@ -34,22 +34,19 @@ void		handle_signal(int sig)
 		else if (sig == SIGCONT)
 		{
 			term_setup(&config);
-			term_clear();
 			render(NULL, 1);
 		}
 	}
 	else if (sig == SIGWINCH)
-	{
-		term_clear();
 		render(NULL, 1);
-	}
 	else
 	{
 		cmdput("ve");
 		cmdput("te");
 		tcsetattr(STDIN_FILENO, TCSANOW, config);
 		free(config);
-		if (sig != -1)
-			exit(0);
+		if (sig == 1337)
+			render(NULL, 1337);
+		exit(0);
 	}
 }
