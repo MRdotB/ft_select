@@ -6,7 +6,7 @@
 #    By: bchaleil <hello@baptistechaleil.fr>        +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2016/01/12 16:21:36 by bchaleil          #+#    #+#              #
-#    Updated: 2016/05/18 01:21:35 by bchaleil         ###   ########.fr        #
+#    Updated: 2016/05/25 17:37:13 by bchaleil         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -20,7 +20,7 @@ INCLUDES		=	-I ./includes -I ./libft/includes
 SRCS			=	srcs/main.c srcs/errors.c srcs/ft_select_init.c\
 					srcs/signal.c srcs/listen_keystroke.c srcs/term.c\
 					srcs/termcaps_wrap.c srcs/render.c srcs/slt_elm.c\
-					srcs/lst_move.c
+					srcs/lst_move.c srcs/lst_actions.c
 
 OBJS			=	$(SRCS:srcs/%.c=obj/%.o)
 

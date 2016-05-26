@@ -33,6 +33,7 @@ struct		s_slt_el
 	int		current;
 	int		x;
 	int		y;
+	int		first;
 };
 
 typedef struct s_slt_el	t_slt_el;
@@ -40,7 +41,7 @@ typedef struct s_slt_el	t_slt_el;
 int		ft_select_init(int ac);
 void	entry_init(t_dlist **head, char **av);
 void	bc_error(char *error_msg);
-void	listen_keystroke(t_dlist **lst, t_dlist *head);
+void	listen_keystroke(t_dlist **lst);
 
 void	catch_signal(void);
 void	handle_signal(int sig);
@@ -59,6 +60,9 @@ void	lst_move_left(t_dlist **lst);
 void	lst_move_down(t_dlist **lst);
 void	lst_move_up(t_dlist **lst);
 void	lst_select(t_dlist **lst);
+void	lst_del_one(t_dlist **lst);
+void	validate_render(t_dlist *lst);
+void	lst_validate(t_dlist **lst);
 
 int		f_biggest(t_dlist *lst);
 void	render(t_dlist *lst, int hacky);
