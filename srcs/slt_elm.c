@@ -6,7 +6,7 @@
 /*   By: bchaleil <hello@baptistechaleil.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/05/14 22:21:13 by bchaleil          #+#    #+#             */
-/*   Updated: 2016/05/26 14:05:37 by bchaleil         ###   ########.fr       */
+/*   Updated: 2016/05/28 14:44:17 by bchaleil         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,6 @@ static t_slt_el	*create_entry(char *str)
 	el->selected = 0;
 	el->current = 0;
 	el->x = 0;
-	el->y = 0;
 	el->first = 0;
 	return (el);
 }
